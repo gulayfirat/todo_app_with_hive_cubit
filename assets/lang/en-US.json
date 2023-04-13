@@ -1,0 +1,33 @@
+{
+    "HomeView": {
+        "noteLabel": "Notes",
+        "taskLabel": "Tasks"
+    },
+    "NotesView": {
+        "searchText": "Search Note",
+        "deleteItemDialogTitle": "Delete Note"
+    },
+    "AddNote": {
+        "appBarAddTitle": "Add Note",
+        "appBarUpdateTitle": "Update Note",
+        "hintText": "Add Note"
+    },
+    "TasksView": {
+        "searchText": "Search Tasks",
+        "hintText": "Add Task",
+        "deleteItemDialogTitle": "Delete Task",
+        "completedText": "Completed"
+    },
+    "SettingsView": {
+        "appBarTitle": "Settings",
+        "changeLanguage": "Change Language",
+        "trLanguage": "Türkçe",
+        "enLanguage": "English",
+        "changeTheme": "Change App Theme"
+    },
+    "CustomTexts": {
+        "questionDelete": "Are you sure you want to delete?",
+        "cancelDelete": "Cancel",
+        "okDelete": "Ok"
+    }
+}

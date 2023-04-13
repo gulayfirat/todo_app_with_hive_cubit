@@ -1,0 +1,33 @@
+{
+    "HomeView": {
+        "noteLabel": "Notlar",
+        "taskLabel": "Görevler"
+    },
+    "NotesView": {
+        "searchText": "Not Ara",
+        "deleteItemDialogTitle": "Notu Sil"
+    },
+    "AddNote": {
+        "appBarAddTitle": "Not Ekle",
+        "appBarUpdateTitle": "Not Güncelle",
+        "hintText": "Not Ekle"
+    },
+    "TasksView": {
+        "searchText": "Görev Ara",
+        "hintText": "Görev Ekle",
+        "deleteItemDialogTitle": "Görevi Sil",
+        "completedText": "Tamamlandı"
+    },
+    "SettingsView": {
+        "appBarTitle": "Ayarlar",
+        "changeLanguage": "Dil Değiştir",
+        "trLanguage": "Türkçe",
+        "enLanguage": "English",
+        "changeTheme": "Uygulama Temasını Değiştir"
+    },
+    "CustomTexts": {
+        "questionDelete": "Silmek istediğinize emin misiniz?",
+        "cancelDelete": "İptal",
+        "okDelete": "Tamam"
+    }
+}
