@@ -21,7 +21,7 @@ Widget _buildNoteGridView(NotesCubit read) {
                   onLongPress: () {
                     DeleteItemDialog.deleteItemDialog(
                       context,
-                      title: LocaleKeys.NotesView_deleteItemDialogTitle,
+                      title: LocaleKeys.NotesView_deleteItemDialogTitle.locale,
                       onPressed: () async {
                         context.router.pop();
                         await read.deleteItem(read.state.noteList![index].id!);
