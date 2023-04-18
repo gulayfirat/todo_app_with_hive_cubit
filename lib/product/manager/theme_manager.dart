@@ -4,7 +4,7 @@ import '../../core/base/base_cache_manager.dart';
 import '../../core/enum/theme/app_themes.dart';
 import '../constant/hive_constant.dart';
 
-class AppThemeManager extends ICacheManager<AppThemes> {
+class AppThemeManager extends BaseCacheManager<AppThemes> {
   AppThemeManager({required String boxName}) : super(boxName);
 
   @override

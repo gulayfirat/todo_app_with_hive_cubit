@@ -7,7 +7,7 @@ import '../theme/darkTheme/theme_dark.dart';
 import '../theme/lightTheme/theme_light.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  late final ICacheManager<AppThemes> manager;
+  late final BaseCacheManager<AppThemes> manager;
   ThemeData currentTheme = AppThemeLight.instance.theme;
   AppThemes currentThemeEnum = AppThemes.light;
 
@@ -32,7 +32,7 @@ class ThemeNotifier extends ChangeNotifier {
     manager.putItem(HiveConstants.appThemeKey, currentThemeEnum);
   }
 
- void getTheme() {
+  void getTheme() {
     AppThemes? theme = manager.getItem(HiveConstants.appThemeKey);
     if (theme == AppThemes.light || theme == null) {
       currentTheme = AppThemeLight.instance.theme;

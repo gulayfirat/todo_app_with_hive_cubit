@@ -1,10 +1,10 @@
 import 'package:hive/hive.dart';
 
-abstract class ICacheManager<T> {
+abstract class BaseCacheManager<T> {
   final String key;
   Box<T>? box;
 
-  ICacheManager(this.key);
+  BaseCacheManager(this.key);
   Future<void> init() async {
     registerAdapters();
     if (!(box?.isOpen ?? false)) {

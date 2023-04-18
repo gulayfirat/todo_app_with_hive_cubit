@@ -12,7 +12,7 @@ import '../../../../product/model/noteModel/note_model.dart';
 part 'add_note_state.dart';
 
 class AddNoteCubit extends Cubit<AddNoteState> {
-  ICacheManager<NoteModel> cacheManager;
+  BaseCacheManager<NoteModel> cacheManager;
   AddNoteCubit({required this.cacheManager}) : super(AddNoteState()) {
     Future.microtask(() async {
       await cacheManager.init();
@@ -26,11 +26,15 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   void bindModelToData() {
     noteController.text = state.noteModel?.note ?? "";
     emit(state.copyWith(
-        colorName: state.noteModel?.colorName ?? BackgroundNoteCardColors.instance.getColorName(BackgroundNoteCardColors.instance.white)));
+        colorName: state.noteModel?.colorName ??
+            BackgroundNoteCardColors.instance
+                .getColorName(BackgroundNoteCardColors.instance.white)));
   }
 
   void changeSelectedColor(index) {
-    emit(state.copyWith(colorName: BackgroundNoteCardColors.instance.getColorName(BackgroundNoteCardColors.instance.getColorList[index])));
+    emit(state.copyWith(
+        colorName: BackgroundNoteCardColors.instance.getColorName(
+            BackgroundNoteCardColors.instance.getColorList[index])));
   }
 
   Future<void> addNote() async {

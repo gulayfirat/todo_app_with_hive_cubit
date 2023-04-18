@@ -12,7 +12,7 @@ import '../../../../product/model/taskModel/task_model.dart';
 part 'tasks_state.dart';
 
 class TasksCubit extends Cubit<TasksState> {
-  late final ICacheManager<TaskModel> cacheManager;
+  late final BaseCacheManager<TaskModel> cacheManager;
   TasksCubit({required this.cacheManager}) : super(const TasksState()) {
     Future.microtask(() async {
       await cacheManager.init();
@@ -66,7 +66,10 @@ class TasksCubit extends Cubit<TasksState> {
           waitingTask.sort((b, a) => a.updateDate!.compareTo(b.updateDate!));
         }
       }
-      emit(state.copyWith(waitingTaskList: waitingTask, completedTaskList: completedTask, loadingStatus: LoadingStatus.success));
+      emit(state.copyWith(
+          waitingTaskList: waitingTask,
+          completedTaskList: completedTask,
+          loadingStatus: LoadingStatus.success));
     } on Exception catch (e) {
       log(e.toString());
       emit(state.copyWith(loadingStatus: LoadingStatus.failure));
@@ -75,11 +78,19 @@ class TasksCubit extends Cubit<TasksState> {
 
   void searchTasks(String query) {
     if (query.isNotEmpty) {
-      List<TaskModel> waitingTaskList =
-          state.waitingTaskList.where((element) => element.task?.toLowerCase().contains(query.toLowerCase()) ?? false).toList();
-      List<TaskModel> completedTaskList =
-          state.completedTaskList.where((element) => element.task?.toLowerCase().contains(query.toLowerCase()) ?? false).toList();
-      emit(state.copyWith(waitingTaskList: waitingTaskList, completedTaskList: completedTaskList));
+      List<TaskModel> waitingTaskList = state.waitingTaskList
+          .where((element) =>
+              element.task?.toLowerCase().contains(query.toLowerCase()) ??
+              false)
+          .toList();
+      List<TaskModel> completedTaskList = state.completedTaskList
+          .where((element) =>
+              element.task?.toLowerCase().contains(query.toLowerCase()) ??
+              false)
+          .toList();
+      emit(state.copyWith(
+          waitingTaskList: waitingTaskList,
+          completedTaskList: completedTaskList));
     } else {
       getTasks();
     }

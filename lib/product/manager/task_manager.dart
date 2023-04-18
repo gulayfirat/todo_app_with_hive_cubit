@@ -4,7 +4,7 @@ import '../../core/base/base_cache_manager.dart';
 import '../constant/hive_constant.dart';
 import '../model/taskModel/task_model.dart';
 
-class TaskCacheManager extends ICacheManager<TaskModel> {
+class TaskCacheManager extends BaseCacheManager<TaskModel> {
   TaskCacheManager({required String boxName}) : super(boxName);
 
   @override

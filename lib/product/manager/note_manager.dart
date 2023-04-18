@@ -4,7 +4,7 @@ import '../../core/base/base_cache_manager.dart';
 import '../constant/hive_constant.dart';
 import '../model/noteModel/note_model.dart';
 
-class NoteCacheManager extends ICacheManager<NoteModel> {
+class NoteCacheManager extends BaseCacheManager<NoteModel> {
   NoteCacheManager({required String boxName}) : super(boxName);
 
   @override
