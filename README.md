@@ -3,6 +3,7 @@ This project is a Todo application.
 Emphasis was placed on technical details rather than design.
 
 Flutter Verison: 3.7.10
+
 Dart Version: 2.19.6	
 
 
