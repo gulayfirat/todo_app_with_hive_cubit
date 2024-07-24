@@ -1,6 +1,7 @@
 part of 'add_note_cubit.dart';
 
 @immutable
+// ignore: must_be_immutable
 class AddNoteState extends Equatable {
   AddNoteState({
     this.noteModel,
@@ -8,7 +9,8 @@ class AddNoteState extends Equatable {
   });
 
   NoteModel? noteModel;
-  String? colorName=BackgroundNoteCardColors.instance.getColorName(BackgroundNoteCardColors.instance.white);
+  String? colorName = BackgroundNoteCardColors.instance
+      .getColorName(BackgroundNoteCardColors.instance.white);
   @override
   List<Object?> get props => [noteModel, colorName];
 

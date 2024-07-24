@@ -1,5 +1,6 @@
 part of 'settings_cubit.dart';
 
+// ignore: must_be_immutable
 class SettingsState extends Equatable {
   SettingsState({this.selectedLanguage, this.appThemes = AppThemes.light, this.currentTheme});
   final String? selectedLanguage;

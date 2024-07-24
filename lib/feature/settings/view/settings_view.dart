@@ -27,63 +27,80 @@ class _SettingsViewState extends State<SettingsView> {
         appBar: AppBar(
           title: Text(LocaleKeys.SettingsView_appBarTitle.locale),
         ),
-        body: _buildBody(),
+        body: const _BuildBody(),
       ),
     );
   }
+}
 
-  BlocConsumer<SettingsCubit, SettingsState> _buildBody() {
+class _BuildBody extends StatelessWidget {
+  const _BuildBody();
+
+  @override
+  Widget build(BuildContext context) {
     return BlocConsumer<SettingsCubit, SettingsState>(
       listener: (context, state) {},
       builder: (context, state) {
         var read = context.read<SettingsCubit>();
         return Column(
-          children: [
-            _buildLanguageCard(context, read),
-            _buildThemeCard(context),
-          ],
+          children: [_BuildLanguageCard(read: read), const _BuildThemeCard()],
         );
       },
     );
   }
+}
 
-  Card _buildThemeCard(BuildContext context) {
+class _BuildThemeCard extends StatelessWidget {
+  const _BuildThemeCard();
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: context.border10Radius),
       child: ListTile(
         title: Text(LocaleKeys.SettingsView_changeTheme.locale),
         trailing: IconButton(
-          icon: context.watch<ThemeNotifier>().currentThemeEnum == AppThemes.light ? const Icon(Icons.dark_mode) : const Icon(Icons.light_mode),
+          icon:
+              context.watch<ThemeNotifier>().currentThemeEnum == AppThemes.light
+                  ? const Icon(Icons.dark_mode)
+                  : const Icon(Icons.light_mode),
           onPressed: () => context.read<ThemeNotifier>().changeTheme(),
         ),
       ),
     );
   }
+}
 
-  Card _buildLanguageCard(BuildContext context, SettingsCubit read) {
+class _BuildLanguageCard extends StatelessWidget {
+  const _BuildLanguageCard({
+    super.key,
+    required this.read,
+  });
+
+  final SettingsCubit read;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: context.border10Radius),
       child: ExpansionTile(
         shape: const RoundedRectangleBorder(side: BorderSide.none),
         onExpansionChanged: (_) => read.getSelectedLanguage(context),
         title: Text(LocaleKeys.SettingsView_changeLanguage.locale),
-        children: _showChangeLanguage(read),
-      ),
-    );
-  }
-
-  _showChangeLanguage(SettingsCubit read) {
-    return List.generate(
-      read.languageList.length,
-      (index) => RadioListTile(
-        title: Text(read.languageList[index], style: Theme.of(context).textTheme.labelLarge),
-        value: read.languageList[index],
-        selected: true,
-        groupValue: read.state.selectedLanguage,
-        onChanged: (value) {
-          read.onChangeLanguage(context, value);
-          context.router.push(const HomeRoute());
-        },
+        children: List.generate(
+          read.languageList.length,
+          (index) => RadioListTile(
+            title: Text(read.languageList[index],
+                style: Theme.of(context).textTheme.labelLarge),
+            value: read.languageList[index],
+            selected: true,
+            groupValue: read.state.selectedLanguage,
+            onChanged: (value) {
+              read.onChangeLanguage(context, value);
+              context.router.push(const HomeRoute());
+            },
+          ),
+        ),
       ),
     );
   }

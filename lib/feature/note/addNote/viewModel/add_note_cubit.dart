@@ -16,14 +16,14 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   AddNoteCubit({required this.cacheManager}) : super(AddNoteState()) {
     Future.microtask(() async {
       await cacheManager.init();
-      bindModelToData();
+      _bindModelToData();
     });
   }
 
   TextEditingController noteController = TextEditingController();
   Uuid uuid = const Uuid();
 
-  void bindModelToData() {
+  void _bindModelToData() {
     noteController.text = state.noteModel?.note ?? "";
     emit(state.copyWith(
         colorName: state.noteModel?.colorName ??

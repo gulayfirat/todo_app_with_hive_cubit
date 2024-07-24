@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_application/core/enum/language_items.dart';
+import 'package:todo_application/core/extension/language_extension.dart';
 
 import '../../../core/enum/theme/app_themes.dart';
 import '../../../core/extension/string_extension.dart';
@@ -23,21 +25,29 @@ class SettingsCubit extends Cubit<SettingsState> {
     if (value == LocaleKeys.SettingsView_enLanguage.locale) {
       selectedLanguage = value;
       context.setLocale(LanguageManager.instance.enLocale);
-    } else if (value == LocaleKeys.SettingsView_trLanguage.locale) {
+      emit(state.copyWith(selectedLanguage: selectedLanguage));
+      return;
+    }
+    if (value == LocaleKeys.SettingsView_trLanguage.locale) {
       selectedLanguage = value;
       context.setLocale(LanguageManager.instance.trLocale);
+      emit(state.copyWith(selectedLanguage: selectedLanguage));
+      return;
     }
-    emit(state.copyWith(selectedLanguage: selectedLanguage));
   }
 
   void getSelectedLanguage(BuildContext context) {
-    if (context.locale == LanguageManager.instance.trLocale) {
-      selectedLanguage = languageList[1];
-    } else if (context.locale == LanguageManager.instance.enLocale) {
-      selectedLanguage = languageList[0];
-    } else {
-      selectedLanguage = languageList[1];
+    if (context.locale == LanguageManager.instance.enLocale) {
+      selectedLanguage = LanguageItems.en.getLocalLanguage();
+      emit(state.copyWith(selectedLanguage: selectedLanguage));
+      return;
     }
+    if (context.locale == LanguageManager.instance.trLocale) {
+      selectedLanguage = LanguageItems.tr.getLocalLanguage();
+      emit(state.copyWith(selectedLanguage: selectedLanguage));
+      return;
+    }
+    selectedLanguage = LanguageItems.en.getLocalLanguage();
     emit(state.copyWith(selectedLanguage: selectedLanguage));
   }
 }

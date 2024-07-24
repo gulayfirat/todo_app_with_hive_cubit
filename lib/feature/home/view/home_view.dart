@@ -14,7 +14,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.tabBar(
@@ -26,8 +25,12 @@ class _HomeViewState extends State<HomeView> {
             currentIndex: context.tabsRouter.activeIndex,
             onTap: context.tabsRouter.setActiveIndex,
             items: [
-              BottomNavigationBarItem(icon: const Icon(Icons.book_sharp), label: LocaleKeys.HomeView_noteLabel.locale),
-              BottomNavigationBarItem(icon: const Icon(Icons.task_alt_outlined), label: LocaleKeys.HomeView_taskLabel.locale),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.book_sharp),
+                  label: LocaleKeys.HomeView_noteLabel.locale),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.task_alt_outlined),
+                  label: LocaleKeys.HomeView_taskLabel.locale),
             ],
           ),
         );

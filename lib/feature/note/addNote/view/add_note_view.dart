@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,8 @@ class _AddNoteViewState extends State<AddNoteView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return AddNoteCubit(cacheManager: NoteCacheManager(boxName: HiveConstants.noteBoxName));
+        return AddNoteCubit(
+            cacheManager: NoteCacheManager(boxName: HiveConstants.noteBoxName));
       },
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {},
@@ -48,13 +50,19 @@ class _AddNoteViewState extends State<AddNoteView> {
     );
   }
 
-  Scaffold _buildBody(AddNoteCubit read, BuildContext context, AddNoteCubit watch) {
+  Scaffold _buildBody(
+      AddNoteCubit read, BuildContext context, AddNoteCubit watch) {
     return Scaffold(
       backgroundColor: read.state.colorName?.getColors,
       appBar: AppBar(
         title: Text(
-          widget.noteModel.id == null ? LocaleKeys.AddNote_appBarAddTitle.locale : LocaleKeys.AddNote_appBarUpdateTitle.locale,
-          style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+          widget.noteModel.id == null
+              ? LocaleKeys.AddNote_appBarAddTitle.locale
+              : LocaleKeys.AddNote_appBarUpdateTitle.locale,
+          style: Theme.of(context)
+              .appBarTheme
+              .titleTextStyle
+              ?.copyWith(color: Theme.of(context).colorScheme.onSecondary),
         ),
         actions: [_buildAddNoteButton(context)],
       ),
@@ -64,7 +72,7 @@ class _AddNoteViewState extends State<AddNoteView> {
             children: [
               _buildColorPaletteSizedBox(context, read),
               Expanded(
-                child: _buildNoteTextField(watch),
+                child: BuildNoteTextField(watch: watch),
               )
             ],
           )),
@@ -73,8 +81,35 @@ class _AddNoteViewState extends State<AddNoteView> {
 
   IconButton _buildAddNoteButton(BuildContext context) {
     return IconButton(
-      onPressed: () async => await context.read<AddNoteCubit>().addNote().then((_) => context.router.pop()),
+      onPressed: () async => await context
+          .read<AddNoteCubit>()
+          .addNote()
+          .then((_) => context.router.pop()),
       icon: const Icon(Icons.done),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class BuildNoteTextField extends StatelessWidget {
+  AddNoteCubit watch;
+  BuildNoteTextField({
+    Key? key,
+    required this.watch,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        CustomTextField(
+          onChanged: (value) {},
+          controller: watch.noteController,
+          hintText: LocaleKeys.AddNote_hintText.locale,
+          inputAction: TextInputAction.newline,
+          isNote: true,
+        )
+      ],
     );
   }
 }
